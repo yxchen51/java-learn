@@ -45,43 +45,4 @@ public class ForBackInteger {
         }
         return (dao < 0x80000000 || dao > 0x7fffffff) ? 0 : (int) dao;
     }
-
-    /**
-     * 将罗马数字的字符串转化为整数值
-     * @param str
-     * @return
-     */
-    public int romaToNum(String str){
-        //建立roma字符对应数字的hash表
-        Map<String,Integer> romaMap = new HashMap<>();
-        romaMap.put("I",1);
-        romaMap.put("II",2);
-        romaMap.put("III",3);
-        romaMap.put("V",5);
-        romaMap.put("X",10);
-        romaMap.put("L",50);
-        romaMap.put("C",100);
-        romaMap.put("D",500);
-        romaMap.put("M",1000);
-        if (romaMap.containsKey(str)){
-            return romaMap.get(str);
-        }
-        int sum = 0;
-        char[] chars = str.toCharArray();
-        for (int i=chars.length-1;i>0;i--){
-            //判断左右两位的大小
-            int value1 = romaMap.get(chars[i]+"");
-            int value2 = romaMap.get(chars[i-1]+"");
-            if ( value1 < value2){
-                sum += value1;
-            }else {
-                sum -= value1;
-            }
-        }
-        return sum;
-    }
-
-    public static void main(String[] args){
-         System.out.println(new ForBackInteger().romaToNum("IIV"));
-    }
 }
